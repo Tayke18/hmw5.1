@@ -1,41 +1,71 @@
 import './App.css';
-import { Array } from './components/Array';
-const comment = [
-  { id:1,
-    date: new Date(),
-    text: 'I hope you enjoy learning React!',
-    author: {
-      name: 'Hello Kitty',
-      avatarUrl: 'http://placekitten.com/g/62/62',
-    },
-  },
-  {
-    id:2,
-    date: new Date(),
-    text: 'I hope you enjoy learning React!',
-    author: {
-      name: 'Hello Kitty',
-      avatarUrl: 'http://placekitten.com/g/64/64',
-    },
-  },
-  { 
-    id:3,
-    date: new Date(),
-    text: 'I hope you enjoy learning React!',
-    author: {
-      name: 'Hello Kitty',
-      avatarUrl: 'http://placekitten.com/g/64/64',
-    },
-  },
+import Cards from './components/Cards';
+import CardLayout from './components/CardLayout';
+
+const users = [{
+  id: "#0001",
+  username: "Phineas",
+  wallpaper: "rgb(0, 81, 119)",
+  userInfo: "phin • 20 yrs co-founder & dev @ giggl",
+  profilePic:
+    "https://cdn.discordapp.com/avatars/94490510688792576/55294160686d30f11d19d21045d3f35a",
+},
+{
+  id: "#1999",
+  username: "Dustin",
+  wallpaper: "rgb(0, 0, 0)",
+  userInfo:
+    "22y - Software Engineer passionate about networking and infrastructure",
+  profilePic: "https://cdn.discordapp.com/avatars/156114103033790464/8bd12e1bdc5bf93249eeffb783587823",
+},
+{
+  id: "#3020",
+  username: "pxseu",
+  wallpaper: "rgb(126, 97, 59)",
+  userInfo:
+    "penniless, invented dogecoin, times person of the year zero years in a row",
+  profilePic: "https://cdn.discordapp.com/avatars/94490510688792576/55294160686d30f11d19d21045d3f35a",
+},
+{
+  id: "#6577",
+  username: "🗕🗗🗙",
+  wallpaper: "rgb(24, 25, 28)",
+  userInfo: "👶 7 years ago 💔2 years ago",
+  profilePic: "https://cdn.discordapp.com/avatars/937051733773938689/679321173067da9d28dc7ce7f6351323",
+},
+{
+  id: "#0002",
+  username: "stealthwave",
+  wallpaper: "rgb(66, 66, 112)",
+  userInfo: "follow me on twitter ☺",
+  profilePic:
+    "https://cdn.discordapp.com/avatars/94490510688792576/55294160686d30f11d19d21045d3f35a",
+},
+{
+  id: "#0023",
+  username: "Atzu",
+  wallpaper: "rgb(66, 81, 78)",
+  userInfo: "Dev for streamers.",
+  profilePic: "data:image/jpeg;base64,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",
+},
+{
+  id: "#0016",
+  username: "Voltages",
+  wallpaper: "rgb(0, 81, 119)",
+  userInfo: "Information technology specialist.",
+  profilePic:
+    "data:image/jpeg;base64,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",
+},
 ];
-
-
 
 function App() {
 
   return (
     <div className="App">
-        <Array array={comment}/>
+      <h1>Online Users 875/2,452</h1>
+      <div className='container'>
+        <Cards array={users} />
+      </div>
 
     </div>
   );
